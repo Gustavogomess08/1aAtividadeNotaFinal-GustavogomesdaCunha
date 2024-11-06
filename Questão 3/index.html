@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Formulário de Contato </title>
+    <style>
+        body 
+        {
+            font-family: Arial, sans-serif;
+            background-color: #135d8f;
+            margin: 0;
+            padding: 0;
+        }
+
+        .contato 
+        {
+            width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1  
+        {
+            text-align: center;
+            color: #050303;
+        }
+
+        label 
+        {
+            font-size: 20px;
+            color:  #000000;
+            margin-bottom: 3px;
+        }
+
+        input, textarea 
+        {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0 15px 0;
+            border: 1px solid #000000;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        input[type="submit"] 
+        {
+            background-color: #053d63;
+            color: white;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover 
+        {
+            background-color: #033557;
+        }
+
+        .erro 
+        {
+            color: red;
+            font-size: 12px;
+        }
+
+        .aceito
+        {
+            color: rgb(4, 128, 0);
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="contato">
+        <h1>Contato</h1>
+        
+        
+        <form id="contatoForm" onsubmit="return validateForm()">
+            <div id="erroMensagem" class="erro"></div>
+
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" name="nome" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="mensagem">Mensagem</label>
+            <textarea id="mensagem" name="mensagem" rows="4" required></textarea>
+
+            <input type="submit" value="enviar">
+        </form>
+
+        <div id="mensagemAceita" class="aceito"></div>
+    </div>
+
+    <script>
+        function validateForm() 
+        {
+            
+            document.getElementById('erroMensagem').innerHTML = '';
+            document.getElementById('mensagemAceita').innerHTML = '';
+
+            
+            var nome = document.getElementById('nome').value;
+            var email = document.getElementById('email').value;
+            var mensagem = document.getElementById('mensagem').value;
+
+            
+            if (nome == '' || email == '' || mensagem == '') {
+                document.getElementById('erroMensagem').innerHTML = 'Preencha todos os campos!';
+                return false; 
+            }
+            var emailPattern =  /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (!emailPattern.test(email)) {
+                document.getElementById('erroMensagem').innerHTML = 'Insire um e-mail válido!';
+                return false;
+            }
+            document.getElementById('mensagemAceita').innerHTML = 'Enviado com sucesso!';
+            return false; 
+        }
+    </script>
+</body>
+</html>
